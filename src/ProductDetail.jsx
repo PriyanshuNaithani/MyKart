@@ -6,6 +6,10 @@ import Loading from './Loading';
 import NotFound from "./NotFound";
 
 function ProductDetail({ onAddToCart }) {
+
+  
+
+  
   const id = +useParams().id;
   
   const [product, setProduct] = useState();
@@ -83,6 +87,7 @@ function ProductDetail({ onAddToCart }) {
 
         </div>
       </div>
+    
       <div className="flex justify-between mt-4">
         <div>
           {id > 1 && (
@@ -104,6 +109,7 @@ function ProductDetail({ onAddToCart }) {
           )}
         </div>
       </div>
+
     </div>
   ) : (
       <Loading />

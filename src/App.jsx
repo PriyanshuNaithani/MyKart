@@ -7,7 +7,9 @@ import { Routes, Route } from 'react-router-dom';
 import NotFound from './NotFound';
 import CartPage from './CartPage';
 
+
 function App() {
+
   const savedDataString = localStorage.getItem("my-cart") || "{}";
   const savedData = JSON.parse(savedDataString);
   const [cart, setCart] = useState(savedData);
@@ -23,6 +25,7 @@ function App() {
     return previous + cart[current];
   }, 0);
 
+
   return (
     <div className="bg-gray-200 h-screen overflow-y-scroll grow flex flex-col">
       <NavBar productCount={totalCount} />
@@ -31,10 +34,10 @@ function App() {
           <Route index element={<ProductListPage />} />
           <Route
             path="/products/:id"
-            element={<ProductDetail onAddToCart={handleAddToCart} />}
+            element={<ProductDetail  onAddToCart={handleAddToCart} />}
           />
           <Route path="*" element={<NotFound />} />
-          <Route path="/cart/" element={<CartPage />}/>
+          <Route path="/cart/" element={<CartPage cartObject={cart}/>}/>
         </Routes>
       </div>
       <Footer />
