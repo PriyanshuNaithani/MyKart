@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { TiDeleteOutline } from 'react-icons/ti';
-function CartRow({ pic, title, price }) {
+function CartRow({ thumbnail, title, price }) {
 	const [value, setValue] = useState(1);
 	function handleClickChange(event) {
 		setValue(event.target.value);
 	}
 	return (
-		<div className="flex flex-col sm:flex-row justify-center sm:justify-around items-center bg-white border-2 py-2 sm:py-0">
+		<div className="grid grid-cols-6 justify-items-center border items-center">
       <TiDeleteOutline className="text-3xl text-gray-50"/>
 			<div className="aspect-square p-2 max-h-24 mt-2">
-				<img className="h-full w-full object-cover" src={pic} />
+				<img className="h-full w-full object-cover" src={thumbnail} />
 			</div>
 			<h2 className="font-sans  text-lg	leading-5 font-bold text-primary-500 mt-2 ">
 				{title}
