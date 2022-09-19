@@ -6,9 +6,9 @@ function CartRow({ thumbnail, title, price }) {
 		setValue(event.target.value);
 	}
 	return (
-		<div className="grid grid-cols-6 justify-items-center border items-center">
+		<div className="grid md:grid-cols-6 justify-items-center border items-center">
       <TiDeleteOutline className="text-3xl text-gray-50"/>
-			<div className="aspect-square p-2 max-h-24 mt-2">
+			<div className="sm:hidden md:block aspect-square p-2 max-h-24 mt-2">
 				<img className="h-full w-full object-cover" src={thumbnail} />
 			</div>
 			<h2 className="font-sans  text-lg	leading-5 font-bold text-primary-500 mt-2 ">

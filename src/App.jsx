@@ -24,7 +24,7 @@ function App() {
   const totalCount = Object.keys(cart).reduce(function(previous, current) {
     return previous + cart[current];
   }, 0);
-
+  
 
   return (
     <div className="bg-gray-200 h-screen overflow-y-scroll grow flex flex-col">
@@ -34,10 +34,10 @@ function App() {
           <Route index element={<ProductListPage />} />
           <Route
             path="/products/:id"
-            element={<ProductDetail  onAddToCart={handleAddToCart} />}
+            element={<ProductDetail onAddToCart={handleAddToCart} />}
           />
           <Route path="*" element={<NotFound />} />
-          <Route path="/cart/" element={<CartPage cartObject={cart}/>}/>
+          <Route path="/cart/" element={<CartPage cartObject={cart} />} />
         </Routes>
       </div>
       <Footer />

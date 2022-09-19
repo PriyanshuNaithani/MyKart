@@ -15,6 +15,7 @@ function ProductListpage() {
       setLoading(false);
     });
   }, []);
+  
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState('default');
 
@@ -26,6 +27,7 @@ function ProductListpage() {
   });
 
   if (sort == 'lowToHigh') {
+   
     data.sort(function(x, y) {
       return x.price < y.price ? -1 : 1;
     });
