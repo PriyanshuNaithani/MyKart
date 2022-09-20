@@ -6,6 +6,9 @@ import ProductDetail from './ProductDetail';
 import { Routes, Route } from 'react-router-dom';
 import NotFound from './NotFound';
 import CartPage from './CartPage';
+import SignupPage from "./SignupPage";
+import LoginPage from "./LoginPage";
+import ForgotPasswordPage from "./ForgotPasswordPage";
 
 
 function App() {
@@ -38,6 +41,9 @@ function App() {
           />
           <Route path="*" element={<NotFound />} />
           <Route path="/cart/" element={<CartPage cartObject={cart} />} />
+          <Route path="/signup" element={<SignupPage />}/>
+          <Route path="/login" element={<LoginPage />}/>
+          <Route path="/forgotPassword" element={<ForgotPasswordPage />}/>
         </Routes>
       </div>
       <Footer />
