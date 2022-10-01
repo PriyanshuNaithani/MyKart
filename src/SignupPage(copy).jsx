@@ -1,13 +1,11 @@
 import React from "react";
+import { Formik , Form } from "formik";
 import { Link } from "react-router-dom";
 import * as yup from 'yup';
-import Input from "./Input";
-import { withFormik } from "formik";
-
-
-
-function callSignupApi(values) {
-    console.log("sending data",values.email,values.password);
+import { FormikInput } from "./Input";
+function SignupPage() {
+  function callSignupApi() {
+    console.log("sending data",data);
   }
 
   const schema = yup.object().shape({
@@ -25,28 +23,23 @@ function callSignupApi(values) {
       password: "",
       confirmPassword: "",
     }
-
-
-export function SignupPage({handleSubmit, values, errors, touched, handleChange, handleBlur}) {
-
   return (
     
     <div className="flex flex-col w-full h-screen justify-center items-center bg-gradient-to-r from-sky-dark to-sky-medium">
-     
-      <form
-        onSubmit = {handleSubmit}
+      <Formik
+        initialValues={initialValues}
+        onSubmit={callSignupApi}
+        validationSchema = {schema}
+        validateOnMount
+        >
+      <Form
         className="flex flex-col w-96 rounded-3xl shadow-lg p-8 bg-sky-dim">
         <h1 className="text-3xl font-bold font-sans mb-2 text-center">
           Create An Account
       </h1>
         <p className="text-sm text-center px-2 font-normal">Create an account to enjoy all the services without any ads for free!</p>
 
-        <Input
-          values={values.email}
-          error={errors.email}
-          touched={touched.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
+        <FormikInput
           label="Email Address"
           id = "email-address"
           name="email"
@@ -54,14 +47,9 @@ export function SignupPage({handleSubmit, values, errors, touched, handleChange,
           required
           autoComplete="email"
           placeholder="Email Address"
-          className="w-80 h-12 mt-6"
+          className="mt-6"
           />
-        <Input
-          values={values.username}
-          error={errors.username}
-          touched={touched.username}
-          onChange={handleChange}
-          onBlur={handleBlur}
+        <FormikInput
           label="Username"
           id = "user-name"
           name="username"
@@ -69,14 +57,9 @@ export function SignupPage({handleSubmit, values, errors, touched, handleChange,
           required
           autoComplete="current-text"
           placeholder="Username"
-          className="w-80 h-12 mt-2"
+          className="mt-2"
           />
-        <Input
-          values={values.password}
-          error={errors.password}
-          touched={touched.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
+        <FormikInput
           label="Password"
           id = "currentPassword"
           name="password"
@@ -84,14 +67,9 @@ export function SignupPage({handleSubmit, values, errors, touched, handleChange,
           required
           autoComplete="current-password"
           placeholder="Password"
-          className="w-80 h-12 mt-2"
+          className="mt-2"
           />
-        <Input
-          values={values.confirmPassword}
-          error={errors.confirmPassword}
-          touched={touched.confirmPassword}
-          onChange={handleChange}
-          onBlur={handleBlur}
+        <FormikInput
           label="Confirm Passsword"
           id = "password"
           name="confirmPassword"
@@ -99,7 +77,7 @@ export function SignupPage({handleSubmit, values, errors, touched, handleChange,
           required
           autoComplete=""
           placeholder="Confirm Passsword"
-          className="w-80 h-12 mt-2"
+          className="mt-2"
           />
         <button
           type="submit"
@@ -113,15 +91,10 @@ export function SignupPage({handleSubmit, values, errors, touched, handleChange,
             className="text-sm underline underline-offset-1 text-sky-extradark"
             to={"/login"}>Sign In</Link>
         </div>
-      </form>
+      </Form>
+      </Formik>
     </div>
       
   );
 }
-const myHOC = withFormik({
-  validationSchema: schema,
-  initialValues:initialValues,
-  handleSubmit: callSignupApi
-});
-const EasySignup = myHOC(SignupPage);
-export default EasySignup;
+export default SignupPage;
