@@ -3,11 +3,20 @@ import { Link } from "react-router-dom";
 import * as yup from 'yup';
 import Input from "./Input";
 import { withFormik } from "formik";
+import axios from "axios";
 
 
 
 function callSignupApi(values) {
-    console.log("sending data",values.email,values.password);
+  axios.post("https://myeasyKart.codeyogi.io/signup",{
+    email:values.email,
+    password:values.password,
+    
+  }).then((response) => {
+    console.log(response.data);
+  }).catch(() =>{
+    console.log("Invalid Credentials");
+  });
   }
 
   const schema = yup.object().shape({
