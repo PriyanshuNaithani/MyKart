@@ -15,6 +15,7 @@ import AuthRoute from "./AuthRoute";
 import UserRoute from "./UserRoute";
 
 
+
 export const CountContext = createContext();
 export const TotalCountContext = createContext();
 export const setCartContext = createContext();
