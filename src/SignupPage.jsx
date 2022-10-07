@@ -11,6 +11,8 @@ function callSignupApi(values) {
   axios.post("https://myeasyKart.codeyogi.io/signup",{
     email:values.email,
     password:values.password,
+    fullName:values.username,
+    // confirmPassword:values.confirmPassword,
     
   }).then((response) => {
     console.log(response.data);
@@ -23,7 +25,7 @@ function callSignupApi(values) {
     email: yup.string().email().required(),
     username: yup.string().required(),
     password: yup.string().min(8).required(),
-    confirmPassword: yup.string().min(8).required(),
+    // confirmPassword: yup.string().min(8).required(),
 
   });
 
@@ -32,7 +34,7 @@ function callSignupApi(values) {
       email: "",
       username: "",
       password: "",
-      confirmPassword: "",
+      // confirmPassword: "",
     }
 
 
@@ -95,21 +97,7 @@ export function SignupPage({handleSubmit, values, errors, touched, handleChange,
           placeholder="Password"
           className="w-80 h-12 mt-2"
           />
-        <Input
-          values={values.confirmPassword}
-          error={errors.confirmPassword}
-          touched={touched.confirmPassword}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          label="Confirm Passsword"
-          id = "password"
-          name="confirmPassword"
-          type="password"
-          required
-          autoComplete=""
-          placeholder="Confirm Passsword"
-          className="w-80 h-12 mt-2"
-          />
+
         <button
           type="submit"
           className="bg-sky-dark hover:bg-sky-extradark text-white w-56 px-12 py-4 ml-2  rounded-xl font-sans font-semibold text-lg leading-4 mt-6  self-center disabled:bg-sky-medium"
