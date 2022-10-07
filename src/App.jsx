@@ -6,9 +6,10 @@ import ProductDetail from './ProductDetail';
 import { Routes, Route } from 'react-router-dom';
 import NotFound from './NotFound';
 import CartPage from './CartPage';
-import SignupPage from "./SignupPage";
+import EasySignup from "./SignupPage";
 import LoginPage from "./LoginPage";
 import ForgotPasswordPage from "./ForgotPasswordPage";
+import ResetPasswordPage from "./ResetPasswordPage";
 import Loading from './Loading';
 import axios from "axios";
 import AuthRoute from "./AuthRoute";
@@ -97,15 +98,22 @@ function App() {
                         <CartPage />
                       </UserRoute >} />
 
-                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/signup" element={
+                      <AuthRoute><EasySignup />
+                    </AuthRoute>} />
+
+      
                     <Route path="/login"
                       element={
                         <AuthRoute>
                           <LoginPage setUser={setUser} />
                         </AuthRoute>} />
                     <Route path="/forgotPassword" element={
-                      <UserRoute ><ForgotPasswordPage />
-                      </UserRoute >} />
+                      <AuthRoute ><ForgotPasswordPage />
+                      </AuthRoute >} />
+                    <Route path="/resetpasswordPage" element={
+                      <AuthRoute ><ResetPasswordPage />
+                      </AuthRoute >} />
 
                   </Routes>
                 </div>
