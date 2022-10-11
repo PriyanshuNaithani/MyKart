@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 function Button({className, ...rest}){
   return(
       <div>
@@ -10,4 +10,4 @@ function Button({className, ...rest}){
       </div>
     );
 }
-export default Button;
+export default memo(Button);

@@ -48,6 +48,9 @@ module.exports = {
         dark: 'rgb(120,202,182)',
         extradark: 'rgb(61,184,170)'
       },
+      green: {
+        light: 'rgb(0, 213, 3 )',
+      },
 
       black: colors.black,
       white: colors.white

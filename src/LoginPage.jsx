@@ -5,7 +5,8 @@ import * as yup from 'yup';
 import Input from "./Input";
 import { withFormik } from "formik";
 import axios from "axios";
-// import { SetUserContext } from "./App";
+import withUser from "./withUser";
+import withAlert from "./withAlert";
 
 
 function callLoginApi(values , bag ) {
@@ -16,10 +17,9 @@ function callLoginApi(values , bag ) {
   }).then((response) => {
     const {user , token} = response.data;
     localStorage.setItem("token",token);
-    console.log(bag);
     bag.props.setUser(user);
   }).catch(() =>{
-    console.log("Invalid Credentials");
+    bag.props.setAlert({type:"error", message:"Invalid Credential" });
   });
   }
 
@@ -36,10 +36,6 @@ function callLoginApi(values , bag ) {
     }
 
 export function LoginPage({handleSubmit, values, errors, touched, handleChange, handleBlur ,}) {
-
-  // const setUser = useContext(SetUserContext);
-  // const User=useContext(UserContext);
-  // console.log("logged in user is",User);
 
 
  
@@ -99,12 +95,17 @@ export function LoginPage({handleSubmit, values, errors, touched, handleChange, 
   );
 }
 
-const myHOC = withFormik({
+// const myHOC = withFormik({
+//   validationSchema: schema,
+//   initialValues:initialValues,
+//   handleSubmit: callLoginApi,
+// });
+// const EasyLogin = myHOC(LoginPage);
+// export default EasyLogin;
+
+const FormikLogin = withFormik({
   validationSchema: schema,
   initialValues:initialValues,
   handleSubmit: callLoginApi,
-});
-const EasyLogin = myHOC(LoginPage);
-
-
-export default EasyLogin;
+})(LoginPage);
+export default withAlert(withUser(FormikLogin));
