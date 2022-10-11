@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Input from './Input';
 import Button from './Button';
 import CartRow from './CartRow';
-import { setCartContext, CountContext } from './App';
+import { setCartContext, CountContext } from './Context';
 
 function CartList({ products }) {
 	const cart = useContext(CountContext);

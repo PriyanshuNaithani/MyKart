@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import ProductListPage from './ProductListPage';
 import Footer from './Footer';
@@ -14,19 +14,17 @@ import Loading from './Loading';
 import axios from "axios";
 import AuthRoute from "./AuthRoute";
 import UserRoute from "./UserRoute";
+import Alert from "./Alert";
+import { CountContext, UserContext, TotalCountContext, AlertContext, setCartContext } from "./Context";
 
 
-
-export const CountContext = createContext();
-export const TotalCountContext = createContext();
-export const setCartContext = createContext();
-export const UserContext = createContext();
-export const SetUserContext = createContext();
 
 function App() {
 
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
+
+
   useEffect(() => {
     if (token) {
       axios.get("https://myeasyKart.codeyogi.io/me", {
@@ -43,6 +41,10 @@ function App() {
   }, []);
 
 
+  const [alert, setAlert] = useState();
+  const removeAlert = () => {
+    setAlert(undefined);
+  };
 
   const [user, setUser] = useState();
   const savedDataString = localStorage.getItem("my-cart") || "{}";
@@ -65,14 +67,16 @@ function App() {
   }, 0);
 
 
+
   if (loading) {
     return <Loading />
   }
 
   return (
     <div className="bg-gray-200 h-screen overflow-y-scroll grow flex flex-col">
-      <UserContext.Provider value={user}>
-        <SetUserContext.Provider value={setUser}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <AlertContext.Provider value={{ alert, setAlert, removeAlert }} >
+          <Alert />
           <CountContext.Provider value={cart}>
             <TotalCountContext.Provider value={totalCount}>
               <setCartContext.Provider value={updateCart}>
@@ -99,14 +103,15 @@ function App() {
                       </UserRoute >} />
 
                     <Route path="/signup" element={
-                      <AuthRoute><EasySignup />
-                    </AuthRoute>} />
+                      <AuthRoute>
+                        <EasySignup />
+                      </AuthRoute>} />
 
-      
+
                     <Route path="/login"
                       element={
                         <AuthRoute>
-                          <LoginPage setUser={setUser} />
+                          <LoginPage />
                         </AuthRoute>} />
                     <Route path="/forgotPassword" element={
                       <AuthRoute ><ForgotPasswordPage />
@@ -114,17 +119,15 @@ function App() {
                     <Route path="/resetpasswordPage" element={
                       <AuthRoute ><ResetPasswordPage />
                       </AuthRoute >} />
-
                   </Routes>
                 </div>
               </setCartContext.Provider>
             </TotalCountContext.Provider>
-            <Footer />
           </CountContext.Provider>
-        </SetUserContext.Provider>
+        </AlertContext.Provider>
       </UserContext.Provider>
+      <Footer />
     </div>
-
   );
 }
 

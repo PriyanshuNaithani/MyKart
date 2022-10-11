@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import CartList from './CartList';
 import Loading from './Loading';
-import { CountContext } from './App';
+import { CountContext } from './Context';
 import { getProductDetail } from './API';
 function CartPage() {
 	const [products, setProducts] = useState([]);

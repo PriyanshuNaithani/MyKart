@@ -3,12 +3,12 @@ import { AiOutlineShopping } from 'react-icons/ai';
 import { MdAccountCircle } from 'react-icons/md';
 import { Link } from "react-router-dom";
 import AmazonLogo from "./AmazonLogo.svg";
-import { TotalCountContext } from "./App";
+import { TotalCountContext } from "./Context";
 import { AiOutlineLogout } from "react-icons/ai";
-import { SetUserContext } from "./App";
-function NavBar() {
+import withUser from "./withUser";
 
-  const setUser = useContext(SetUserContext);
+function NavBar({setUser}) {
+
   const handleLogout = ()=>{
     localStorage.removeItem("token");
     setUser(undefined);
@@ -41,4 +41,4 @@ function NavBar() {
     </div>
   );
 }
-export default NavBar;
+export default withUser(NavBar);
